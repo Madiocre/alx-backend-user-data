@@ -4,12 +4,14 @@ Logger Filtering Function
 """
 import re
 import logging
+from typing import List
 
 
-def filter_datum(fields, redaction, message, separator):
-    """ 
-    Filtering the Logger 
-    
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
+    """
+    Filtering the Logger
+
     Args:
     fields: fields to be redacted
     redaction: what to put in place of redacted fields
