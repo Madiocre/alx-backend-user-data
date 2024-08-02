@@ -56,21 +56,23 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     return cnx
 
 
-def main():
-    """
-    Obtain a database connection using get_db and retrieves all rows
-    in the users table and display each row under a filtered format
+def main() -> None:
+    """ Obtain database connection using get_db
+    retrieve all role in the users table and display
+    each row under a filtered format
     """
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users;")
-    field_names = [i[0] for i in cursor.description]
 
+    headers = [field[0] for field in cursor.description]
     logger = get_logger()
 
     for row in cursor:
-        str_row = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, field_names))
-        logger.info(str_row.strip())
+        info_answer = ''
+        for f, p in zip(row, headers):
+            info_answer += f'{p}={(f)}; '
+        logger.info(info_answer)
 
     cursor.close()
     db.close()
