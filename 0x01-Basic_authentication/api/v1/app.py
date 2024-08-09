@@ -21,6 +21,7 @@ if auth_type == 'auth':
 if auth_type == 'basic_auth':
     auth = BasicAuth()
 
+
 @app.before_request
 def auth_user():
     """Authenticates a user before processing a request.
