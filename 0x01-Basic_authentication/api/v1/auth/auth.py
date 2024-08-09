@@ -4,6 +4,7 @@ Auth module for the API
 """
 from flask import request
 from typing import List, TypeVar
+import fnmatch
 
 
 class Auth():
@@ -19,7 +20,7 @@ class Auth():
             return True
 
         for paths in excluded_paths:
-            if path.rstrip('/') in paths.rstrip('/'):
+            if path.rstrip('/') in paths.rstrip('/*'):
                 return False
 
         return True
