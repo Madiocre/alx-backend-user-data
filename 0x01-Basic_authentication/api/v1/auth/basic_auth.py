@@ -14,9 +14,14 @@ class BasicAuth(Auth):
         """ initialize the auth class """
         pass
 
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
-        """ returns the Base64 part of the Authorization header for a Basic Authentication """
-        if not authorization_header or not isinstance(authorization_header, str):
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
+        """ returns the Base64 part of the Authorization header
+        for a Basic Authentication
+        """
+        if not authorization_header:
+            return None
+        if not isinstance(authorization_header, str):
             return None
 
         match = re.match(r'^Basic ', authorization_header)
@@ -24,5 +29,3 @@ class BasicAuth(Auth):
             return None
 
         return authorization_header[len(match.group(0)):]
-        
-        
