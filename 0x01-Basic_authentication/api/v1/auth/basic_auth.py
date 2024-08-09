@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """
-Auth module for the API
+BasicAuth module for the API
 """
 from flask import request
-from typing import List, TypeVar
+from typing import List, TypeVar, Tuple
 from api.v1.auth.auth import Auth
+from models.user import User
 import re
+import base64
+import binascii
 
 
 class BasicAuth(Auth):
-    """ Auth Class """
+    """ BasicAuth Class """
     def __init__(self):
         """ initialize the auth class """
         pass
