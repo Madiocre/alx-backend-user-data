@@ -27,6 +27,7 @@ def auth_user():
     """Authenticates a user before processing a request.
     """
     if auth:
+        setattr(request, "current_user", auth.current_user(request))
         excluded_paths = [
             '/api/v1/status/',
             '/api/v1/unauthorized/',
@@ -34,10 +35,9 @@ def auth_user():
         ]
         if auth.require_auth(request.path, excluded_paths):
             auth_header = auth.authorization_header(request)
-            user = auth.current_user(request)
             if auth_header is None:
                 abort(401)
-            if user is None:
+            if request.current_user is None:
                 abort(403)
 
 
