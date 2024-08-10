@@ -37,7 +37,8 @@ def auth_user():
         ]
         if auth.require_auth(request.path, excluded_paths):
             auth_header = auth.authorization_header(request)
-            if auth_header is None:
+            cookie = auth.session_cookie(request)
+            if auth_header is None and cookie is None:
                 abort(401)
             if request.current_user is None:
                 abort(403)
