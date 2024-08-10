@@ -21,7 +21,7 @@ if auth_type == 'auth':
     auth = Auth()
 elif auth_type == 'basic_auth':
     auth = BasicAuth()
-elif auth_type == 'session_auth':
+elif auth_type == "session_auth":
     auth = SessionAuth()
 
 @app.before_request
@@ -67,4 +67,5 @@ def not_found(error) -> str:
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
+    app.debug = True
     app.run(host=host, port=port)
