@@ -36,6 +36,7 @@ class Auth():
     def current_user(self, request=None) -> TypeVar('User'):
         """ blank """
         return None
+
     def session_cookie(self, request=None):
         """
         Returns a cookie from a request
