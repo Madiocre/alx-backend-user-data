@@ -24,6 +24,7 @@ elif auth_type == 'basic_auth':
 elif auth_type == "session_auth":
     auth = SessionAuth()
 
+
 @app.before_request
 def auth_user():
     """Authenticates a user before processing a request.
