@@ -33,7 +33,29 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """Adds a new user to the database.
         """
-        new_user = User(email=email, hashed_password=hashed_password)
-        self._session.add(new_user)
-        self._session.commit()
+        session = self._session
+        try:
+            new_user = User(email=email, hashed_password=hashed_password)
+            session.add(new_user)
+            session.commit()
+        except Exception:
+            session.rollback()
+            new_user = None
         return new_user
+
+    def find_user_by(self, **kwargs) -> User:
+        """ Find user by a given attribute
+        """
+        attrs, vals = [], []
+        for attr, val in kwargs.items():
+            if not hasattr(User, attr):
+                raise InvalidRequestError()
+            attrs.append(getattr(User, attr))
+            vals.append(val)
+
+        session = self._session
+        query = session.query(User)
+        user = query.filter(tuple_(*attrs).in_([tuple(vals)])).first()
+        if not user:
+            raise NoResultFound()
+        return user
