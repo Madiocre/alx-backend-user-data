@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""
+User class using declarative base
+"""
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
