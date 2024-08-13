@@ -33,11 +33,6 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """ Creates new User instance and
             saves them to the database.
-            Args:
-                - email
-                - hashed_password
-            Return:
-                - new User object
         """
         session = self._session
         try:
@@ -51,11 +46,6 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """ Find user by a given attribute
-            Args:
-                - Dictionary of attributes to use as search
-                  parameters
-            Return:
-                - User object
         """
 
         attrs, vals = [], []
@@ -74,10 +64,6 @@ class DB:
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """ Searches for user instance using given id parameter
-            Args:
-                - user_id: user's id
-            Return:
-                - User instance found
         """
         user = self.find_user_by(id=user_id)
         session = self._session
